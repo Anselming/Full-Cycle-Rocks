@@ -1,0 +1,87 @@
+services:
+  
+  # Nginx reverse proxy
+  proxy:
+    container_name: full-reverseproxy
+    restart: on-failure
+    networks:
+      - full-front
+    build: ./proxy
+    ports:
+      - 8080:80
+    # volumes:
+    #   - full-reverseproxy:/usr/share/nginx/html
+    depends_on:
+      - "webapp"      
+
+
+  # NodeJS Application
+  webapp:
+    container_name: full-webapp
+    networks:
+      - full-front
+      - full-database      
+    restart: on-failure
+    build: ./webapp
+    expose:
+      - 8001
+    # volumes:
+    #   - full-webapp:/app     
+    depends_on:
+      - "database"            
+
+  # Mysql database
+  #  docker exec -it full-mysql bash
+  #  mysql -uroot -p
+  #  123456
+  database:
+    container_name: full-database
+    build: ./database
+    command: '--default-authentication-plugin=mysql_native_password'
+    restart: always
+    networks:
+      - full-database
+    # volumes:
+    #   - full-database:/var/lib/fullcycle-mysql-8
+    environment:
+      - MYSQL_ROOT_PASSWORD=123456
+      - MYSQL_PASSWORD=123456
+    ports:
+      - 3306:3306      
+      - 33060:33060        
+
+
+# volumes:
+#   full-database:      
+#   full-reverseproxy:
+#   full-webapp:
+
+
+networks:
+  full-front:
+    driver: bridge
+  full-database:
+    driver: bridge    
+
+############
+# 1 - Criar a imagem do banco de dados
+#   - Expor para conexão por outros containers
+#   - Colocar dependência
+#   - Colocar os volumes corretos
+
+# 2 - Criar a imagem do NodeJS
+#   - Escrever 'alo mundo'
+#   - Escrever a frase do exercício
+#   - Acessar o banco de dados e fazer a estrutura básica (se não existir tabela: criar)
+#   - Acessar os dados do banco (select na tabela pegando todos os nomes)
+#   - Exibir resultado na tela
+
+# 3 - Criação do proxy
+#   - Apontamento para o caminho correto
+#   - Exposição correta da porta
+
+
+## Usar variaveis em abientes
+# Melhorar código de acesso ao banco
+# Documentar
+# remover o erro
