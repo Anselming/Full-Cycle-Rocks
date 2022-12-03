@@ -35,7 +35,7 @@ app.get('/save', (req, res) => {
   });
   
 
-  res.send(`<strong>${queryString.nome}</strong> criado com sucesso.<br /><a href='javascript:history.go(-1);'>Voltar</a>`);
+  res.send(`<strong>${queryString.nome}</strong> criado com sucesso.<br /><a href='http://localhost:8080/'>Voltar</a>`);
 
 });
 
