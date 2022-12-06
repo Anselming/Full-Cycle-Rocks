@@ -52,7 +52,7 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=123456
       - MYSQL_PASSWORD=123456
-    expose:
+    ports:
       - 3306      
       - 33060
 

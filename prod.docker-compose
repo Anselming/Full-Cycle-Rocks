@@ -8,7 +8,7 @@ services:
       - full-front
     build: 
       context: ./proxy
-      dockerfile: dev.dockerfile
+      dockerfile: prod.dockerfile
     ports:
       - 8080:80
     # volumes:
@@ -26,7 +26,7 @@ services:
     restart: on-failure
     build: 
       context: ./webapp
-      dockerfile: dev.dockerfile
+      dockerfile: prod.dockerfile
     expose:
       - 8001
     # volumes:
@@ -42,7 +42,7 @@ services:
     container_name: full-database
     build: 
       context: ./database
-      dockerfile: dev.dockerfile
+      dockerfile: prod.dockerfile
     command: '--default-authentication-plugin=mysql_native_password'
     restart: always
     networks:
@@ -54,7 +54,7 @@ services:
       - MYSQL_PASSWORD=123456
     expose:
       - 3306      
-      - 33060
+      - 33060        
 
 
 # volumes:

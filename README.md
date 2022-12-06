@@ -37,3 +37,18 @@ Porém algumas melhorias podem ser identificadas, como:
 - Estruturação da solução node para não ter nenhum elemento de frontend, criando uma solução SPA com Angular, Vue ou React.
 
  
+ ## Warnings do MySQL
+Temporary server started.
+
+/usr/local/bin/docker-entrypoint.sh: running /docker-entrypoint-initdb.d/startupdb.sql
+
+Stopping temporary server
+
+Received SHUTDOWN from user root. Shutting down mysqld (Version: 8.0.31).
+
+Temporary server stopped
+
+
+* Todas essas mensagens são esperadas. 
+* Caminho do docker-entrypoint.sh do MySQL: https://github.com/docker-library/mysql/blob/6cb73371396bdfcc048a701fa4a4c9e3eee4fde4/8.0/docker-entrypoint.sh#L370-L396
+* Explicação do Warning: https://stackoverflow.com/questions/73114814/mysql-docker-container-receives-shutdown-command
